@@ -6,8 +6,11 @@
         margin: 0;
         font-size: 100%;
         font-family: sans-serif;
-        background-color: #fefdee;
         font-weight: lighter;
+      }
+      body {
+        background-color: #fffffb;
+        height: 100vh;
       }
       h1 {
         font-size: 2.5em;
@@ -18,18 +21,21 @@
       }
       #toggle-info {
         position: absolute;
+        background: transparent;
         top: 0;
         right: 0.5em;
         opacity: 0.3;
         cursor: pointer;
         border: none;
+        font-size: 0.75em;
+        line-height: 1.5em;
       }
       #content {
         margin: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 100vh;
+        height: 100%;
       }
       #container {
         max-width: 33em;
@@ -40,6 +46,7 @@
       }
       #grid {
         aspect-ratio: 1 / 1;
+        background-color: #fefdee;
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -55,10 +62,24 @@
         cursor: pointer;
         position: relative;
       }
-      .true {
+      .challenge.false::after {
+        content: "✓";
+        font-size: 7em;
+        opacity: 0%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: grey;
+        text-shadow: 3px 3px 3px black;
+      }
+      .challenge.false:hover::after {
+        opacity: 20%;
+      }
+      .challenge.true {
         opacity: 50%;
       }
-      .true::after {
+      .challenge.true::after {
         content: "✓";
         font-size: 7em;
         opacity: 100%;
@@ -82,11 +103,67 @@
         border: 0.1em beige solid;
         border-radius: 1em;
       }
+      #menu {
+        content: "☰";
+        font-size: 1.5em;
+        position: absolute;
+        top: 0.5em;
+        left: 0.5em;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        display: none;
+        transition: display 0.5s;
+      }
+      #overlay.visible {
+        display: unset;
+        transition: display 0.5s;
+      }
+      #sidebar {
+        padding: 1em 1em 0;
+        width: 15em;
+        height: calc(100% - 1em);
+        position: absolute;
+        top: 0;
+        transform: translate(-100%, 0);
+        transition: transform 0.5s;
+        background-color: #fffffb;
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      #sidebar.visible {
+        transform: translate(0%, 0%);
+        transition: transform 0.5s;
+      }
+      #sidebar a {
+        display: block;
+        text-decoration: none;
+      }
+      #legal {
+        color: #aaaaaa;
+        text-align: center;
+        font-size: 0.8em;
+        padding-bottom: 1em;
+      }
+      #legal div {
+        margin: 0 0 0.5em;
+      }
     </style>
     <script>
       const defaults = {
-        "feat-lucky": {
-          featId: "feat-lucky",
+        "#feat-lucky": {
+          featId: "#feat-lucky",
           featName: "Lucky",
           featDescription: {
             p: [
@@ -111,7 +188,6 @@
       };
 
       function challengeNode(feat, idx) {
-        console.log(arguments.callee.name);
         const challenge = feat.challenges[idx];
         const node = document.createElement("div");
         node.id = idx;
@@ -124,21 +200,19 @@
       }
 
       function toggleAchievement(featId, challengeIdx) {
-        console.log(arguments.callee.name);
         const state = getState();
         const feat = state[featId];
         feat.challenges[challengeIdx].status = !feat.challenges[challengeIdx].status;
         saveState(state);
         if (checkComplete(feat)) {
-            renderInfo(feat);
+          renderInfo(feat);
         } else {
-            const challenge = document.getElementById(challengeIdx);
-            challenge.replaceWith(challengeNode(feat, challengeIdx));
+          const challenge = document.getElementById(challengeIdx);
+          challenge.replaceWith(challengeNode(feat, challengeIdx));
         }
       }
 
       function renderChallenges(feat) {
-        console.log(arguments.callee.name);
         const children = [];
         for (let i = 0; i < feat.challenges.length; i += 1) {
           const child = challengeNode(feat, i);
@@ -148,35 +222,37 @@
       }
 
       function renderInfo(feat) {
-        console.log(arguments.callee.name);
         const featInfo = document.createElement("div");
         featInfo.id = "info";
         const children = [];
         for (const entry of feat.featDescription.p) {
-            const p = document.createElement("p");
-            p.innerText = entry;
-            children.push(p);
+          const p = document.createElement("p");
+          p.innerText = entry;
+          children.push(p);
         }
         featInfo.replaceChildren(...children);
         document.getElementById("grid").replaceChildren(featInfo);
       }
 
       function toggleInfo(feat) {
-        console.log(arguments.callee.name);
         if (document.getElementById("grid").childNodes.length > 1) {
-            renderInfo(feat);
+          renderInfo(feat);
         } else {
-            renderChallenges(feat);
+          renderChallenges(feat);
         }
       }
 
       function checkComplete(feat) {
-        console.log(arguments.callee.name);
         // Define winning combinations as indices in the gameState array
         const winCombinations = [
-          [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-          [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-          [0, 4, 8], [2, 4, 6], // Diagonals
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8], // Rows
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8], // Columns
+          [0, 4, 8],
+          [2, 4, 6], // Diagonals
         ];
 
         const challenges = feat.challenges;
@@ -191,8 +267,20 @@
         return false;
       }
 
+      function populateMenu(state) {
+        const children = [];
+        for (const featId of Object.keys(state)) {
+          const feat = state[featId];
+          const child = document.createElement("a");
+          child.id = `a-${feat.featName}`;
+          child.href = `${featId}`;
+          child.innerText = feat.featName;
+          children.push(child);
+        }
+        document.getElementById("nav-links").replaceChildren(...children);
+      }
+
       function getState() {
-        console.log(arguments.callee.name);
         const state = localStorage.getItem("feat-tac-toe");
         if (!state) {
           saveState(defaults);
@@ -202,14 +290,12 @@
       }
 
       function saveState(state) {
-        console.log(arguments.callee.name);
         localStorage.setItem("feat-tac-toe", JSON.stringify(state));
       }
 
       function renderState() {
-        console.log(arguments.callee.name);
         const state = getState();
-        const featId = window.location.hash || "feat-lucky";
+        const featId = window.location.hash || "#feat-lucky";
         const feat = state[featId];
         const container = document.getElementById("container");
         const header = document.createElement("h1");
@@ -217,9 +303,9 @@
         const toggleButton = document.createElement("button");
         toggleButton.id = "toggle-info";
         toggleButton.innerText = "ⓘ";
-        toggleButton.onclick = function() { 
-            const feat = getState()[featId];
-            toggleInfo(feat); 
+        toggleButton.onclick = function () {
+          const feat = getState()[featId];
+          toggleInfo(feat);
         };
         header.append(toggleButton);
         const grid = document.createElement("div");
@@ -227,16 +313,32 @@
         grid.className = "bordered";
         container.replaceChildren(header, grid);
         if (checkComplete(feat)) {
-            renderInfo(feat);
+          renderInfo(feat);
         } else {
-            renderChallenges(feat);
+          renderChallenges(feat);
         }
+
+        populateMenu(state);
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("visible");
+        document.getElementById("overlay").classList.toggle("visible");
       }
 
       window.onload = renderState;
     </script>
   </head>
   <body>
+    <button id="menu" onclick="toggleSidebar()">☰</button>
+    <div id="overlay" onclick="toggleSidebar()"></div>
+    <div id="sidebar">
+      <div id="nav-links"></div>
+      <div id="legal">
+        <div>Dungeons & Dragons content is property of Wizards of the Coast LLC.</div>
+        <div>Original content &copy;2023, Patrick Stewart</div>
+      </div>
+    </div>
     <div id="content">
       <nav id="nav"></nav>
       <div id="container"></div>
