@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <title>Feat-Tac-Toe</title>
+    <style>
+      * {
+        margin: 0;
+        font-size: 100%;
+        font-family: sans-serif;
+        background-color: #fefdee;
+        font-weight: lighter;
+      }
+      h1 {
+        font-size: 2.5em;
+        font-family: "Times New Roman", serif;
+        margin: 0 0 0.5em;
+        color: #822000;
+        font-variant: small-caps;
+      }
+      #toggle-info {
+        position: absolute;
+        top: 0;
+        right: 0.5em;
+        opacity: 0.3;
+        cursor: pointer;
+        border: none;
+      }
+      #content {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+      }
+      #container {
+        max-width: 33em;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 0.75em;
+        position: relative;
+      }
+      #grid {
+        aspect-ratio: 1 / 1;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        column-gap: 1em;
+        row-gap: 1em;
+        box-shadow: 0px 2px 4px grey;
+      }
+      .challenge {
+        margin: auto auto;
+        text-align: center;
+        align-self: center;
+        cursor: pointer;
+        position: relative;
+      }
+      .true {
+        opacity: 50%;
+      }
+      .true::after {
+        content: "✓";
+        font-size: 7em;
+        opacity: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: green;
+        text-shadow: 3px 3px 3px black;
+      }
+      #info {
+        height: 100%;
+        grid-column: 1 / span 3;
+        grid-row: 1 / span 3;
+      }
+      #info p {
+        margin: 0 0 1em;
+      }
+      .bordered {
+        padding: 1em;
+        border: 0.1em beige solid;
+        border-radius: 1em;
+      }
+    </style>
+    <script>
+      const defaults = {
+        "feat-lucky": {
+          featId: "feat-lucky",
+          featName: "Lucky",
+          featDescription: {
+            p: [
+              "You have inexplicable luck that seems to kick in at just the right moment.",
+              "You have 3 luck points. Whenever you make an attack roll, an ability check, or a saving throw, you can spend one luck point to roll an additional d20. You can choose to spend one of your luck points after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw.",
+              "You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled.",
+              "You regain your expended luck points when you finish a long rest.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Roll a nat 20 on a Strength check or saving throw" },
+            { status: false, description: "Roll a nat 20 on an attack" },
+            { status: false, description: "Roll a nat 20 on a Intellect check or saving throw" },
+            { status: false, description: "Roll a nat 20 on a Dexterity check or saving throw" },
+            { status: false, description: "Roll a nat 1 on any check or saving throw" },
+            { status: false, description: "Roll a nat 20 on a Wisdom check or saving throw" },
+            { status: false, description: "Roll a nat 20 on a Constitution check or saving throw" },
+            { status: false, description: "Survive a critical hit without being knocked unconscious" },
+            { status: false, description: "Roll a nat 20 on a Charisma check or saving throw" },
+          ],
+        },
+      };
+
+      function challengeNode(feat, idx) {
+        console.log(arguments.callee.name);
+        const challenge = feat.challenges[idx];
+        const node = document.createElement("div");
+        node.id = idx;
+        node.className = `challenge ${challenge.status}`;
+        node.innerText = challenge.description;
+        node.onclick = function (evt) {
+          toggleAchievement(feat.featId, idx);
+        };
+        return node;
+      }
+
+      function toggleAchievement(featId, challengeIdx) {
+        console.log(arguments.callee.name);
+        const state = getState();
+        const feat = state[featId];
+        feat.challenges[challengeIdx].status = !feat.challenges[challengeIdx].status;
+        saveState(state);
+        if (checkComplete(feat)) {
+            renderInfo(feat);
+        } else {
+            const challenge = document.getElementById(challengeIdx);
+            challenge.replaceWith(challengeNode(feat, challengeIdx));
+        }
+      }
+
+      function renderChallenges(feat) {
+        console.log(arguments.callee.name);
+        const children = [];
+        for (let i = 0; i < feat.challenges.length; i += 1) {
+          const child = challengeNode(feat, i);
+          children.push(child);
+        }
+        document.getElementById("grid").replaceChildren(...children);
+      }
+
+      function renderInfo(feat) {
+        console.log(arguments.callee.name);
+        const featInfo = document.createElement("div");
+        featInfo.id = "info";
+        const children = [];
+        for (const entry of feat.featDescription.p) {
+            const p = document.createElement("p");
+            p.innerText = entry;
+            children.push(p);
+        }
+        featInfo.replaceChildren(...children);
+        document.getElementById("grid").replaceChildren(featInfo);
+      }
+
+      function toggleInfo(feat) {
+        console.log(arguments.callee.name);
+        if (document.getElementById("grid").childNodes.length > 1) {
+            renderInfo(feat);
+        } else {
+            renderChallenges(feat);
+        }
+      }
+
+      function checkComplete(feat) {
+        console.log(arguments.callee.name);
+        // Define winning combinations as indices in the gameState array
+        const winCombinations = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+          [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+          [0, 4, 8], [2, 4, 6], // Diagonals
+        ];
+
+        const challenges = feat.challenges;
+        let complete = false;
+        // Check each winning combination
+        for (let combination of winCombinations) {
+          const [a, b, c] = combination;
+          if (challenges[a].status && challenges[b].status && challenges[c].status) {
+            return true; // 3-in-a-row found
+          }
+        }
+        return false;
+      }
+
+      function getState() {
+        console.log(arguments.callee.name);
+        const state = localStorage.getItem("feat-tac-toe");
+        if (!state) {
+          saveState(defaults);
+          return JSON.parse(defaults);
+        }
+        return JSON.parse(state);
+      }
+
+      function saveState(state) {
+        console.log(arguments.callee.name);
+        localStorage.setItem("feat-tac-toe", JSON.stringify(state));
+      }
+
+      function renderState() {
+        console.log(arguments.callee.name);
+        const state = getState();
+        const featId = window.location.hash || "feat-lucky";
+        const feat = state[featId];
+        const container = document.getElementById("container");
+        const header = document.createElement("h1");
+        header.innerText = feat.featName;
+        const toggleButton = document.createElement("button");
+        toggleButton.id = "toggle-info";
+        toggleButton.innerText = "ⓘ";
+        toggleButton.onclick = function() { 
+            const feat = getState()[featId];
+            toggleInfo(feat); 
+        };
+        header.append(toggleButton);
+        const grid = document.createElement("div");
+        grid.id = "grid";
+        grid.className = "bordered";
+        container.replaceChildren(header, grid);
+        if (checkComplete(feat)) {
+            renderInfo(feat);
+        } else {
+            renderChallenges(feat);
+        }
+      }
+
+      window.onload = renderState;
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <nav id="nav"></nav>
+      <div id="container"></div>
+    </div>
+  </body>
+</html>
