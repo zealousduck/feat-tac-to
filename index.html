@@ -72,9 +72,11 @@
         transform: translate(-50%, -50%);
         color: grey;
         text-shadow: 3px 3px 3px black;
+        transition: opacity 0.2s;
       }
       .challenge.false:hover::after {
         opacity: 20%;
+        transition: opacity 0.2s;
       }
       .challenge.true {
         opacity: 50%;
@@ -95,7 +97,8 @@
         grid-column: 1 / span 3;
         grid-row: 1 / span 3;
       }
-      #info p {
+      #info p,
+      #info li {
         margin: 0 0 1em;
       }
       .bordered {
@@ -122,11 +125,11 @@
         background-color: rgba(0, 0, 0, 0.2);
         z-index: 10;
         display: none;
-        transition: display 0.5s;
+        transition: display 0.2s;
       }
       #overlay.visible {
         display: unset;
-        transition: display 0.5s;
+        transition: display 0.4s;
       }
       #sidebar {
         padding: 1em 1em 0;
@@ -135,20 +138,22 @@
         position: absolute;
         top: 0;
         transform: translate(-100%, 0);
-        transition: transform 0.5s;
+        transition: transform 0.2s;
         background-color: #fffffb;
         z-index: 99;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        box-shadow: 0px 1px 4px grey;
       }
       #sidebar.visible {
         transform: translate(0%, 0%);
-        transition: transform 0.5s;
+        transition: transform 0.4s;
       }
       #sidebar a {
         display: block;
         text-decoration: none;
+        margin: 0 0 1em;
       }
       #legal {
         color: #aaaaaa;
@@ -183,6 +188,92 @@
             { status: false, description: "Roll a nat 20 on a Constitution check or saving throw" },
             { status: false, description: "Survive a critical hit without being knocked unconscious" },
             { status: false, description: "Roll a nat 20 on a Charisma check or saving throw" },
+          ],
+        },
+        "#feat-great-weapon-master": {
+          featId: "#feat-great-weapon-master",
+          featName: "Great Weapon Master",
+          featDescription: {
+            p: [
+              "You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes. You gain the following benefits:",
+            ],
+            ul: [
+              "On your turn, when you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action.",
+              "Before you make a melee attack with a heavy weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack's damage.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Roll a nat 20 on an attack roll with a 2-handed weapon" },
+            { status: false, description: "Defeat an enemy with a greataxe" },
+            { status: false, description: "Deal max damage with a 2-handed weapon" },
+            { status: false, description: "Defeat an enemy with a greatsword" },
+            { status: false, description: "Own at least four 2-handed weapons" },
+            { status: false, description: "Defeat an enemy with a maul or greatclub" },
+            { status: false, description: "Defeat 2 or more enemies in a single turn with a 2-handed weapon" },
+            { status: false, description: "Defeat an enemy with a halberd" },
+            { status: false, description: "Roll a nat 20 on a Strength check or saving throw" },
+          ],
+        },
+        "#feat-mobile": {
+          featId: "#feat-mobile",
+          featName: "Mobile",
+          featDescription: {
+            p: ["You are exceptionally speedy and agile. You gain the following benefits:"],
+            ul: [
+              "Your speed increases by 10 feet.",
+              "When you use the Dash action, difficult terrain doesn't cost you extra movement on that turn.",
+              "When you make a melee attack against a creature, you don't provoke opportunity attacks from that creature for the rest of the turn, whether you hit or not.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Roll a nat 20 for a Dexterity check or saving throw" },
+            {
+              status: false,
+              description: "Use your entire movement and move through at least 5 feet of difficult terrain",
+            },
+            { status: false, description: "Successfully jump 10 feet or more over an obstacle during combat" },
+            { status: false, description: "Use your entire movement and successfully attack an enemy" },
+            { status: false, description: "Take the Dash action in 5 separate combats" },
+            { status: false, description: "Take the dodge action and successfully avoid incoming damage" },
+            { status: false, description: "Successfully climb 15 feet or more during combat" },
+            {
+              status: false,
+              description: "Take the disengage action to avoid opportunity attacks from 3 enemies in a single turn",
+            },
+            { status: false, description: "Use your entire movement after taking the Dash action" },
+          ],
+        },
+        "#feat-war-caster": {
+          featId: "#feat-war-caster",
+          featName: "War Caster",
+          featDescription: {
+            p: [
+              "You have practiced casting spells in the midst of combat, learning techniques that grant you the following benefits:",
+            ],
+            ul: [
+              "You have advantage on Constitution saving throws that you make to maintain your concentration on a spell when you take damage.",
+              "You can perform the somatic components of spells even when you have weapons or a shield in one or both hands.",
+              "When a hostile creature's movement provokes an opportunity attack from you, you can use your reaction to cast a spell at the creature, rather than making an opportunity attack. The spell must have a casting time of 1 action and must target only that creature.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Succeed on a constitution check to maintain concentration while casting" },
+            { status: false, description: "Kill an enemy with a spell at a distance of 60 feet or more" },
+            {
+              status: false,
+              description:
+                "Move at least 15 feet and cast a spell with a range of Touch during a single turn of combat",
+            },
+            { status: false, description: "Avoid or otherwise prevent damage by casting a spell with your reaction" },
+            { status: false, description: "Roll a nat 20 on an spell attack roll" },
+            {
+              status: false,
+              description:
+                "In a single combat, cast 3 or more spells using a spell slot greater than that spell’s level",
+            },
+            { status: false, description: "Kill an enemy with a spell at a distance of 30 feet or less" },
+            { status: false, description: "Damage 3 or more enemies with a single spell" },
+            { status: false, description: "Successfully use your reaction to hit an enemy with an opportunity attack" },
           ],
         },
       };
@@ -230,6 +321,15 @@
           p.innerText = entry;
           children.push(p);
         }
+        if (feat.featDescription.ul && feat.featDescription.ul.length) {
+          const ul = document.createElement("ul");
+          for (const entry of feat.featDescription.ul) {
+            const li = document.createElement("li");
+            li.innerText = entry;
+            ul.appendChild(li);
+          }
+          children.push(ul);
+        }
         featInfo.replaceChildren(...children);
         document.getElementById("grid").replaceChildren(featInfo);
       }
@@ -275,6 +375,10 @@
           child.id = `a-${feat.featName}`;
           child.href = `${featId}`;
           child.innerText = feat.featName;
+          child.onclick = function () {
+            setTimeout(renderState, 10);
+            toggleSidebar();
+          };
           children.push(child);
         }
         document.getElementById("nav-links").replaceChildren(...children);
