@@ -1,8 +1,12 @@
 <html>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <noscript>Sorry, this app needs JavaScript to run.</noscript>
   <head>
     <title>Feat-Tac-Toe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Feat-Tac-Toe homebrews a system for players to unlock new feats in tabletop roleplaying games.">
+    <meta name="keywords" content="homebrew, feat, feats, 5e, 5th edition, dungeons, dragons, tic-tac-toe, dnd, d&d, dungeons & dragons">
+    <meta name="author" content="Patrick Stewart">
     <style>
       * {
         font-family: sans-serif;
@@ -23,6 +27,17 @@
         font-size: min(2.5em, 8vmin);
         font-variant: small-caps;
         margin: 0 0 0.5em;
+      }
+
+      a {
+        color: #337ab7;
+        text-decoration: none;
+      }
+
+      hr {
+        border: 1px solid;
+        color: #eeeeee;
+        margin: 0 0 1em;
       }
 
       #toggle-info {
@@ -114,6 +129,10 @@
         height: 100%;
       }
 
+      #info-link {
+        float: right;
+      }
+
       p,
       li {
         margin: 0 0 1em;
@@ -137,10 +156,16 @@
         text-align: left;
       }
 
+      @media (max-width: 33em) {
+        #menu {
+          margin: 0;
+        }
+      }
+
       #overlay {
         background-color: rgba(0, 0, 0, 0.2);
+        bottom: 0;
         display: none;
-        height: 100%;
         left: 0;
         position: absolute;
         top: 0;
@@ -165,12 +190,13 @@
 
       #sidebar {
         background-color: #fffffb;
+        bottom: 0;
         box-shadow: 0px 1px 4px grey;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: calc(100% - 1em);
-        padding: 1em 1em 0;
+        overflow: auto;
+        padding: 1.5em 1.5em 0;
         position: absolute;
         top: 0;
         transform: translate(-110%, 0);
@@ -189,6 +215,11 @@
         margin: 0 0 1em;
       }
 
+      #reset-app {
+        color: rgb(170, 14, 14);
+        margin: 0 0 2em;
+      }
+
       .legal {
         color: #aaaaaa;
         font-size: 0.8em;
@@ -200,34 +231,27 @@
       .legal div {
         margin: 0 0 0.5em;
       }
-
-      a {
-        color: #337ab7;
-        text-decoration: none;
-      }
-
-      hr {
-        border: 1px solid;
-        color: #eeeeee;
-        margin: 0 0 1em;
-      }
-
-      @media (max-width: 33em) {
-        #menu {
-          margin: 0;
-        }
-      }
     </style>
 
     <script>
       const defaults = {
         "#defensive-duelist": {
           featId: "#defensive-duelist",
+    url: "https://5e.tools/feats.html#defensive%20duelist_phb",
           featName: "Defensive Duelist",
           featDescription: {
             p: [
               "When you are wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, you can use your reaction to add your proficiency bonus to your AC for that attack, potentially causing the attack to miss you.",
+              "Your proficiency bonus increases with character level:"
             ],
+            ul: [
+              "Level 1: +2",
+              "Level 5: +3",
+              "Level 9: +4",
+              "Level 13: +5",
+              "Level 17: +6"
+            ],
+            url: "https://"
           },
           challenges: [
             { status: false, description: "Disarm an enemy" },
@@ -243,6 +267,7 @@
         },
         "#durable-lite": {
           featId: "#durable-lite",
+    url: "https://5e.tools/feats.html#durable_phb",
           featName: "Durable Lite",
           featDescription: {
             p: [
@@ -268,6 +293,7 @@
         },
         "#lucky": {
           featId: "#lucky",
+    url: "https://5e.tools/feats.html#lucky_phb",
           featName: "Lucky",
           featDescription: {
             p: [
@@ -291,6 +317,7 @@
         },
         "#lucky-lite": {
           featId: "#lucky-lite",
+    url: "https://5e.tools/feats.html#lucky_phb",
           featName: "Lucky Lite",
           featDescription: {
             p: [
@@ -315,6 +342,7 @@
         },
         "#inspiring-leader": {
           featId: "#inspiring-leader",
+    url: "https://5e.tools/feats.html#inspiring%20leader_phb",
           featName: "Inspiring Leader",
           featDescription: {
             p: [
@@ -337,6 +365,7 @@
         },
         "#great-weapon-master": {
           featId: "#great-weapon-master",
+    url: "https://5e.tools/feats.html#great%20weapon%20master_phb",
           featName: "Great Weapon Master",
           featDescription: {
             p: [
@@ -361,6 +390,7 @@
         },
         "#martial-adept": {
           featId: "#martial-adept",
+    url: "https://5e.tools/feats.html#martial%20adept_phb",
           featName: "Martial Adept",
           featDescription: {
             p: [
@@ -388,6 +418,7 @@
         },
         "#mobile": {
           featId: "#mobile",
+    url: "https://5e.tools/feats.html#mobile_phb",
           featName: "Mobile",
           featDescription: {
             p: ["You are exceptionally speedy and agile. You gain the following benefits:"],
@@ -417,6 +448,7 @@
         },
         "#mobile-lite": {
           featId: "#mobile-lite",
+    url: "https://5e.tools/feats.html#mobile_phb",
           featName: "Mobile Lite",
           featDescription: {
             p: [
@@ -443,8 +475,38 @@
             { status: false, description: "Use your entire movement after taking the Dash action" },
           ],
         },
+        "#skilled": {
+          featId: "#skilled",
+    url: "https://5e.tools/feats.html#skilled_phb",
+          featName: "Skilled",
+          featDescription: {
+            p: [
+              "You gain proficiency in any combination of three skills or tools of your choice.",
+              "Available skills:",
+            ],
+            ul: [
+              "Strength: Athletics",
+              "Dexterity: Acrobatics, Sleight of Hand, Stealth",
+              "Intelligence:Arcana, History, Investigation, Nature, Religion",
+              "Wisdom: Animal Handling, Insight, Medicine, Perception, Survival",
+              "Charisma: Deception, Intimidation, Performance, Persuasion"
+            ],
+          },
+          challenges: [
+            { status: false, description: "Successfully complete an Athletics or Acrobatics check" },
+            { status: false, description: "Successfully complete a Nature or Animal Handling check" },
+            { status: false, description: "Successfully complete an Investigation or Perception check" },
+            { status: false, description: "Successfully complete an Intimidation or Persuasion check" },
+            { status: false, description: "Successfully complete a Survival or Medicine check" },
+            { status: false, description: "Successfully complete an Arcana or History check" },
+            { status: false, description: "Successfully complete a Deception or Performance check" },
+            { status: false, description: "Successfully complete an Insight or Religion check" },
+            { status: false, description: "Successfully complete a Stealth or Sleight of Hand check" },
+          ],
+        },
         "#war-caster": {
           featId: "#war-caster",
+    url: "https://5e.tools/feats.html#war%20caster_phb",
           featName: "War Caster",
           featDescription: {
             p: [
@@ -525,6 +587,15 @@
           }
           children.push(ul);
         }
+        if (feat.url) {
+          const link = document.createElement("a");
+          link.id = "info-link";
+          link.href = feat.url;
+          link.target = "_blank";
+          link.innerText = `${feat.featName} on 5e.tools`;
+          children.push(document.createElement("hr"));
+          children.push(link);
+        }
         featInfo.replaceChildren(...children);
         document.getElementById("grid").replaceChildren(featInfo);
       }
@@ -593,6 +664,7 @@
         document.getElementById("nav-links").replaceChildren(...sidebarChildren);
 
         const reset = document.createElement("a");
+        reset.id = "reset-app";
         reset.href = "";
         reset.innerText = "Reset";
         reset.onclick = function () {
@@ -683,20 +755,20 @@
         <div id="landing">
           <h1>How it works</h1>
           <p>
-            “Feat-Tac-Toe” is a homebrew option that allows players to unlock additional feats by completing a set of challenges.
+            “Feat-Tac-Toe” is a homebrew option that enables players to unlock additional feats by completing a set of challenges.
           </p>
           <p>
             For each feat, players are given a 3x3 grid of in-game challenges their character may satisfy. If a
             player can complete 3-in-a-row, then they permanently unlock that feat for their player character.
           </p>
           <p>
-            No double dipping! A challenge only counts for <b>one</b> feat-tac-toe board at a time.
+            No double dipping! A challenge only counts for <em>one</em> feat-tac-toe board at a time.
           </p>
           <h1>Is this balanced?</h1>
           <p>Probably not.</p>
           <h1>What are Lite feats?</h1>
           <p>
-            Lite feats are modified to reduce overall power level. Some feats are arguably too strong to be grantable in
+            Lite feats are modified to reduce overall power level. Some feats are arguably too strong to be unlockable in
             their base forms.
           </p>
           <p>For example, stacking feats that grant +1s to ability scores could easily get out of hand.</p>
