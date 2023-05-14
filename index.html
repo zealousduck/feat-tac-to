@@ -10,13 +10,13 @@
         font-weight: lighter;
         margin: 0;
       }
-      
+
       body {
         background-color: #fffffb;
         display: flex;
         flex-direction: column;
       }
-      
+
       h1 {
         color: #822000;
         font-family: "Times New Roman", serif;
@@ -24,7 +24,7 @@
         font-variant: small-caps;
         margin: 0 0 0.5em;
       }
-      
+
       #toggle-info {
         background: transparent;
         border: none;
@@ -35,7 +35,7 @@
         opacity: 0.3;
         padding-left: 0.5em;
       }
-      
+
       #content {
         display: flex;
         flex-direction: column;
@@ -44,17 +44,17 @@
         padding: 0 2%;
         width: 96%;
       }
-      
+
       #landing {
         padding: 0 0.5em;
       }
-      
+
       #container {
         margin: 0 auto;
         max-width: 33em;
         position: relative;
       }
-      
+
       #grid {
         aspect-ratio: 1 / 1;
         background-color: #fefdee;
@@ -66,7 +66,7 @@
         position: relative;
         row-gap: 0.5em;
       }
-      
+
       .challenge {
         align-self: center;
         cursor: pointer;
@@ -74,7 +74,7 @@
         position: relative;
         text-align: center;
       }
-      
+
       .challenge.false::after {
         color: grey;
         content: "✓";
@@ -87,16 +87,16 @@
         transform: translate(-50%, -50%);
         transition: opacity 0.2s;
       }
-      
+
       .challenge.false:hover::after {
         opacity: 20%;
         transition: opacity 0.2s;
       }
-      
+
       .challenge.true {
         opacity: 50%;
       }
-      
+
       .challenge.true::after {
         color: green;
         content: "✓";
@@ -108,12 +108,12 @@
         top: 50%;
         transform: translate(-50%, -50%);
       }
-      
+
       #info {
         grid-column: 1 / span 3;
         height: 100%;
       }
-      
+
       p,
       li {
         margin: 0 0 1em;
@@ -215,7 +215,7 @@
       @media (max-width: 33em) {
         #menu {
           margin: 0;
-        } 
+        }
       }
     </style>
 
@@ -226,8 +226,8 @@
           featName: "Defensive Duelist",
           featDescription: {
             p: [
-              "When you are wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, you can use your reaction to add your proficiency bonus to your AC for that attack, potentially causing the attack to miss you."
-            ]
+              "When you are wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, you can use your reaction to add your proficiency bonus to your AC for that attack, potentially causing the attack to miss you.",
+            ],
           },
           challenges: [
             { status: false, description: "Disarm an enemy" },
@@ -239,6 +239,31 @@
             { status: false, description: "Dodge to successfully avoid damage" },
             { status: false, description: "Use the help action to feint or taunt an enemy" },
             { status: false, description: "Use a finesse weapon to non-lethally incapacitate an enemy" },
+          ],
+        },
+        "#durable-lite": {
+          featId: "#durable-lite",
+          featName: "Durable Lite",
+          featDescription: {
+            p: [
+              "(Lite feats are modified to reduce overall power level.)",
+              "Hardy and resilient, you gain the following benefits:",
+            ],
+            ul: [
+              "Gain 1 extra Hit Die.",
+              "When you roll a Hit Die to regain hit points, the minimum number of hit points you regain from the roll equals twice your Constitution modifier (minimum of 2).",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Heal using 4 or more hit dice in a single short rest" },
+            { status: false, description: "Survive combat with 10% or less of your max HP" },
+            { status: false, description: "Survive any poison effect ending through non-magical means" },
+            { status: false, description: "Take damage and survive a fall from 50 feet or more" },
+            { status: false, description: "After falling unconscious, stabilize by succeeding on death saving throws" },
+            { status: false, description: "Critically succeed a Constitution check or saving throw" },
+            { status: false, description: "Lose 50% or more of your max HP in 5 separate combats" },
+            { status: false, description: "Survive after receiving max damage from an enemy attack" },
+            { status: false, description: "Survive a critical hit" },
           ],
         },
         "#lucky": {
@@ -288,6 +313,28 @@
             { status: false, description: "Critically succeed a Charisma check or saving throw" },
           ],
         },
+        "#inspiring-leader": {
+          featId: "#inspiring-leader",
+          featName: "Inspiring Leader",
+          featDescription: {
+            p: [
+              "You can spend 10 minutes inspiring your companions, shoring up their resolve to fight.",
+              "When you do so, choose up to six friendly creatures (which can include yourself) within 30 feet of you who can see or hear you and who can understand you. Each creature can gain temporary hit points equal to your level + your Charisma modifier.",
+              "A creature can't gain temporary hit points from this feat again until it has finished a short or long rest.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Critically succeed on a Persuasion check" },
+            { status: false, description: "Lead your party through danger and avoid all environmental damage" },
+            { status: false, description: "Use the help action to aid an ally during combat" },
+            { status: false, description: "Lead your party through combat after being outnumbered 2-to-1" },
+            { status: false, description: "Convince an NPC to assist your party in a significant way." },
+            { status: false, description: "Critically succeed a Charisma saving throw" },
+            { status: false, description: "Land the killing blow on an enemy leader" },
+            { status: false, description: "Critically succeed on an Intimidation check" },
+            { status: false, description: "Successfully plan & execute a heist, combat, or other operation" },
+          ],
+        },
         "#great-weapon-master": {
           featId: "#great-weapon-master",
           featName: "Great Weapon Master",
@@ -310,6 +357,33 @@
             { status: false, description: "Defeat 2 enemies in a single turn with a 2-handed weapon" },
             { status: false, description: "Defeat an enemy with a halberd" },
             { status: false, description: "Critically succeed a Strength check or saving throw" },
+          ],
+        },
+        "#martial-adept": {
+          featId: "#martial-adept",
+          featName: "Martial Adept",
+          featDescription: {
+            p: [
+              "You have martial training that allows you to perform special combat maneuvers. You gain the following benefits:",
+            ],
+            ul: [
+              "You learn two maneuvers of your choice from among those available to the Battle Master archetype in the fighter class.",
+              "If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).",
+              "You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it.",
+              "You regain your expended superiority dice when you finish a short or long rest.",
+              "Available maneuvers: Ambush, Bait and Switch, Brace, Commander's Strike, Commanding Presence, Disarming Attack, Distracting Strike, Evasive Footwork, Feinting Attack, Goading Attack, Grappling Strike, Lunging Attack, Maneuvering Attack, Menacing Attack, Parry, Precision Attack, Pushing Attack, Quick Toss, Rally, Riposte, Sweeping Attack, Tactical Assessment, Trip Attack"
+              ]
+          },
+          challenges: [
+            { status: false, description: "Disarm an enemy" },
+            { status: false, description: "Hit an enemy with a prepared attack action" },
+            { status: false, description: "Successfully use your reaction to hit an enemy with an opportunity attack" },
+            { status: false, description: "Deal max damage with a melee weapon" },
+            { status: false, description: "Critically hit with an attack" },
+            { status: false, description: "Use the help action to assist an ally in combat" },
+            { status: false, description: "Dodge to successfully avoid damage" },
+            { status: false, description: "Successfully grapple an enemy" },
+            { status: false, description: "Successfully attack an enemy from stealth" },
           ],
         },
         "#mobile": {
@@ -347,11 +421,9 @@
           featDescription: {
             p: [
               "(Lite feats are modified to reduce overall power level.)",
-              "You are exceptionally speedy and agile. You gain the following benefits:"
+              "You are exceptionally speedy and agile. You gain the following benefits:",
             ],
-            ul: [
-              "Your speed increases by 10 feet.",
-            ],
+            ul: ["Your speed increases by 10 feet."],
           },
           challenges: [
             { status: false, description: "Critically succeed a Dexterity check or saving throw" },
@@ -387,10 +459,13 @@
           challenges: [
             { status: false, description: "Successfully maintain concentration after getting attacked" },
             { status: false, description: "Defeat an enemy with a spell at a distance of 60 feet or more" },
-            { status: false, description: "Move at least 15 feet and cast a spell with a range of Touch in a single turn", },
+            {
+              status: false,
+              description: "Move at least 15 feet and cast a spell with a range of Touch in a single turn",
+            },
             { status: false, description: "Avoid or otherwise prevent damage by casting a spell with your reaction" },
             { status: false, description: "Critically hit with a spell or cantrip" },
-            { status: false, description: "Upcast 3 or more spells at a higher level in a single combat", },
+            { status: false, description: "Upcast 3 or more spells at a higher level in a single combat" },
             { status: false, description: "Defeat an enemy with a spell at a distance of 30 feet or less" },
             { status: false, description: "Damage 3 or more enemies with a single spell" },
             { status: false, description: "Successfully use your reaction to hit an enemy with an opportunity attack" },
@@ -520,9 +595,9 @@
         const reset = document.createElement("a");
         reset.href = "";
         reset.innerText = "Reset";
-        reset.onclick = function() {
+        reset.onclick = function () {
           saveState(defaults);
-        }
+        };
         document.getElementById("sidebar").appendChild(reset);
 
         // a lil nasty but sure whatever my dude
@@ -608,25 +683,33 @@
         <div id="landing">
           <h1>How it works</h1>
           <p>
-            “Feat-Tac-Toe” is a homebrew option that allows players to unlock additional feats by completing a set of
-            in-game achievements.
+            “Feat-Tac-Toe” is a homebrew option that allows players to unlock additional feats by completing a set of challenges.
           </p>
           <p>
-            For each feat, players are given a 3x3 grid of in-game conditions their player-character may satisfy. If a
+            For each feat, players are given a 3x3 grid of in-game challenges their character may satisfy. If a
             player can complete 3-in-a-row, then they permanently unlock that feat for their player character.
+          </p>
+          <p>
+            No double dipping! A challenge only counts for <b>one</b> feat-tac-toe board at a time.
           </p>
           <h1>Is this balanced?</h1>
           <p>Probably not.</p>
+          <h1>What are Lite feats?</h1>
+          <p>
+            Lite feats are modified to reduce overall power level. Some feats are arguably too strong to be grantable in
+            their base forms.
+          </p>
+          <p>For example, stacking feats that grant +1s to ability scores could easily get out of hand.</p>
           <h1>Can I make my own?</h1>
           <p>Absolutely.</p>
           <h1>Let's go!</h1>
           <div id="get-started-links"></div>
         </div>
       </div>
-    <footer class="legal">
-      <div>Dungeons & Dragons content is property of Wizards of the Coast LLC.</div>
-      <div>Original content &copy;2023, Patrick Stewart</div>
-    </footer>
+      <footer class="legal">
+        <div>Dungeons & Dragons content is property of Wizards of the Coast LLC.</div>
+        <div>Original content &copy;2023, Patrick Stewart</div>
+      </footer>
     </div>
   </body>
 </html>
