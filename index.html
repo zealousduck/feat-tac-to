@@ -2,11 +2,18 @@
   <noscript>Sorry, this app needs JavaScript to run.</noscript>
   <head>
     <title>Feat-Tac-Toe</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Feat-Tac-Toe homebrews a system for players to unlock new feats in tabletop roleplaying games.">
-    <meta name="keywords" content="homebrew, feat, feats, 5e, 5th edition, dungeons, dragons, tic-tac-toe, dnd, d&d, dungeons & dragons">
-    <meta name="author" content="Patrick Stewart">
+    <meta
+      name="description"
+      content="Feat-Tac-Toe homebrews a system for players to unlock new feats in tabletop roleplaying games."
+    />
+    <meta
+      name="keywords"
+      content="homebrew, feat, feats, 5e, 5th edition, dungeons, dragons, tic-tac-toe, dnd, d&d, dungeons & dragons"
+    />
+    <meta name="author" content="Patrick Stewart" />
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
     <style>
       * {
         font-family: sans-serif;
@@ -237,21 +244,14 @@
       const defaults = {
         "#defensive-duelist": {
           featId: "#defensive-duelist",
-    url: "https://5e.tools/feats.html#defensive%20duelist_phb",
           featName: "Defensive Duelist",
           featDescription: {
             p: [
               "When you are wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, you can use your reaction to add your proficiency bonus to your AC for that attack, potentially causing the attack to miss you.",
-              "Your proficiency bonus increases with character level:"
+              "Your proficiency bonus increases with character level:",
             ],
-            ul: [
-              "Level 1: +2",
-              "Level 5: +3",
-              "Level 9: +4",
-              "Level 13: +5",
-              "Level 17: +6"
-            ],
-            url: "https://"
+            ul: ["Level 1: +2", "Level 5: +3", "Level 9: +4", "Level 13: +5", "Level 17: +6"],
+            url: "https://5e.tools/feats.html#defensive%20duelist_phb",
           },
           challenges: [
             { status: false, description: "Disarm an enemy" },
@@ -267,7 +267,6 @@
         },
         "#durable-lite": {
           featId: "#durable-lite",
-    url: "https://5e.tools/feats.html#durable_phb",
           featName: "Durable Lite",
           featDescription: {
             p: [
@@ -278,6 +277,7 @@
               "Gain 1 extra Hit Die.",
               "When you roll a Hit Die to regain hit points, the minimum number of hit points you regain from the roll equals twice your Constitution modifier (minimum of 2).",
             ],
+            url: "https://5e.tools/feats.html#durable_phb",
           },
           challenges: [
             { status: false, description: "Heal using 4 or more hit dice in a single short rest" },
@@ -293,7 +293,6 @@
         },
         "#lucky": {
           featId: "#lucky",
-    url: "https://5e.tools/feats.html#lucky_phb",
           featName: "Lucky",
           featDescription: {
             p: [
@@ -302,6 +301,7 @@
               "You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled.",
               "You regain your expended luck points when you finish a long rest.",
             ],
+            url: "https://5e.tools/feats.html#lucky_phb",
           },
           challenges: [
             { status: false, description: "Critically succeed a Strength check or saving throw" },
@@ -317,7 +317,6 @@
         },
         "#lucky-lite": {
           featId: "#lucky-lite",
-    url: "https://5e.tools/feats.html#lucky_phb",
           featName: "Lucky Lite",
           featDescription: {
             p: [
@@ -327,6 +326,7 @@
               "You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled.",
               "You regain your expended luck points when you finish a long rest.",
             ],
+            url: "https://5e.tools/feats.html#lucky_phb",
           },
           challenges: [
             { status: false, description: "Critically succeed a Strength check or saving throw" },
@@ -342,7 +342,6 @@
         },
         "#inspiring-leader": {
           featId: "#inspiring-leader",
-    url: "https://5e.tools/feats.html#inspiring%20leader_phb",
           featName: "Inspiring Leader",
           featDescription: {
             p: [
@@ -350,6 +349,7 @@
               "When you do so, choose up to six friendly creatures (which can include yourself) within 30 feet of you who can see or hear you and who can understand you. Each creature can gain temporary hit points equal to your level + your Charisma modifier.",
               "A creature can't gain temporary hit points from this feat again until it has finished a short or long rest.",
             ],
+            url: "https://5e.tools/feats.html#inspiring%20leader_phb",
           },
           challenges: [
             { status: false, description: "Critically succeed on a Persuasion check" },
@@ -365,7 +365,6 @@
         },
         "#great-weapon-master": {
           featId: "#great-weapon-master",
-    url: "https://5e.tools/feats.html#great%20weapon%20master_phb",
           featName: "Great Weapon Master",
           featDescription: {
             p: [
@@ -375,6 +374,7 @@
               "On your turn, when you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action.",
               "Before you make a melee attack with a heavy weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack's damage.",
             ],
+            url: "https://5e.tools/feats.html#great%20weapon%20master_phb",
           },
           challenges: [
             { status: false, description: "Critically hit with a 2-handed weapon" },
@@ -390,7 +390,6 @@
         },
         "#martial-adept": {
           featId: "#martial-adept",
-    url: "https://5e.tools/feats.html#martial%20adept_phb",
           featName: "Martial Adept",
           featDescription: {
             p: [
@@ -401,8 +400,9 @@
               "If a maneuver you use requires your target to make a saving throw to resist the maneuver's effects, the saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier (your choice).",
               "You gain one superiority die, which is a d6 (this die is added to any superiority dice you have from another source). This die is used to fuel your maneuvers. A superiority die is expended when you use it.",
               "You regain your expended superiority dice when you finish a short or long rest.",
-              "Available maneuvers: Ambush, Bait and Switch, Brace, Commander's Strike, Commanding Presence, Disarming Attack, Distracting Strike, Evasive Footwork, Feinting Attack, Goading Attack, Grappling Strike, Lunging Attack, Maneuvering Attack, Menacing Attack, Parry, Precision Attack, Pushing Attack, Quick Toss, Rally, Riposte, Sweeping Attack, Tactical Assessment, Trip Attack"
-              ]
+              "Available maneuvers: Ambush, Bait and Switch, Brace, Commander's Strike, Commanding Presence, Disarming Attack, Distracting Strike, Evasive Footwork, Feinting Attack, Goading Attack, Grappling Strike, Lunging Attack, Maneuvering Attack, Menacing Attack, Parry, Precision Attack, Pushing Attack, Quick Toss, Rally, Riposte, Sweeping Attack, Tactical Assessment, Trip Attack",
+            ],
+            url: "https://5e.tools/feats.html#martial%20adept_phb",
           },
           challenges: [
             { status: false, description: "Disarm an enemy" },
@@ -418,7 +418,6 @@
         },
         "#mobile": {
           featId: "#mobile",
-    url: "https://5e.tools/feats.html#mobile_phb",
           featName: "Mobile",
           featDescription: {
             p: ["You are exceptionally speedy and agile. You gain the following benefits:"],
@@ -427,6 +426,7 @@
               "When you use the Dash action, difficult terrain doesn't cost you extra movement on that turn.",
               "When you make a melee attack against a creature, you don't provoke opportunity attacks from that creature for the rest of the turn, whether you hit or not.",
             ],
+            url: "https://5e.tools/feats.html#mobile_phb",
           },
           challenges: [
             { status: false, description: "Critically succeed a Dexterity check or saving throw" },
@@ -448,7 +448,6 @@
         },
         "#mobile-lite": {
           featId: "#mobile-lite",
-    url: "https://5e.tools/feats.html#mobile_phb",
           featName: "Mobile Lite",
           featDescription: {
             p: [
@@ -456,6 +455,7 @@
               "You are exceptionally speedy and agile. You gain the following benefits:",
             ],
             ul: ["Your speed increases by 10 feet."],
+            url: "https://5e.tools/feats.html#mobile_phb",
           },
           challenges: [
             { status: false, description: "Critically succeed a Dexterity check or saving throw" },
@@ -477,7 +477,6 @@
         },
         "#skilled": {
           featId: "#skilled",
-    url: "https://5e.tools/feats.html#skilled_phb",
           featName: "Skilled",
           featDescription: {
             p: [
@@ -489,8 +488,9 @@
               "Dexterity: Acrobatics, Sleight of Hand, Stealth",
               "Intelligence:Arcana, History, Investigation, Nature, Religion",
               "Wisdom: Animal Handling, Insight, Medicine, Perception, Survival",
-              "Charisma: Deception, Intimidation, Performance, Persuasion"
+              "Charisma: Deception, Intimidation, Performance, Persuasion",
             ],
+            url: "https://5e.tools/feats.html#skilled_phb",
           },
           challenges: [
             { status: false, description: "Successfully complete an Athletics or Acrobatics check" },
@@ -506,7 +506,6 @@
         },
         "#war-caster": {
           featId: "#war-caster",
-    url: "https://5e.tools/feats.html#war%20caster_phb",
           featName: "War Caster",
           featDescription: {
             p: [
@@ -517,6 +516,7 @@
               "You can perform the somatic components of spells even when you have weapons or a shield in one or both hands.",
               "When a hostile creature's movement provokes an opportunity attack from you, you can use your reaction to cast a spell at the creature, rather than making an opportunity attack. The spell must have a casting time of 1 action and must target only that creature.",
             ],
+            url: "https://5e.tools/feats.html#war%20caster_phb",
           },
           challenges: [
             { status: false, description: "Successfully maintain concentration after getting attacked" },
@@ -587,10 +587,10 @@
           }
           children.push(ul);
         }
-        if (feat.url) {
+        if (feat.featDescription.url) {
           const link = document.createElement("a");
           link.id = "info-link";
-          link.href = feat.url;
+          link.href = feat.featDescription.url;
           link.target = "_blank";
           link.innerText = `${feat.featName} on 5e.tools`;
           children.push(document.createElement("hr"));
@@ -755,21 +755,20 @@
         <div id="landing">
           <h1>How it works</h1>
           <p>
-            “Feat-Tac-Toe” is a homebrew option that enables players to unlock additional feats by completing a set of challenges.
+            “Feat-Tac-Toe” is a homebrew option that enables players to unlock additional feats by completing a set of
+            challenges.
           </p>
           <p>
-            For each feat, players are given a 3x3 grid of in-game challenges their character may satisfy. If a
-            player can complete 3-in-a-row, then they permanently unlock that feat for their player character.
+            For each feat, players are given a 3x3 grid of in-game challenges their character may satisfy. If a player
+            can complete 3-in-a-row, then they permanently unlock that feat for their player character.
           </p>
-          <p>
-            No double dipping! A challenge only counts for <em>one</em> feat-tac-toe board at a time.
-          </p>
+          <p>No double dipping! A challenge only counts for <em>one</em> feat-tac-toe board at a time.</p>
           <h1>Is this balanced?</h1>
           <p>Probably not.</p>
           <h1>What are Lite feats?</h1>
           <p>
-            Lite feats are modified to reduce overall power level. Some feats are arguably too strong to be unlockable in
-            their base forms.
+            Lite feats are modified to reduce overall power level. Some feats are arguably too strong to be unlockable
+            in their base forms.
           </p>
           <p>For example, stacking feats that grant +1s to ability scores could easily get out of hand.</p>
           <h1>Can I make my own?</h1>
