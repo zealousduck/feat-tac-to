@@ -12,7 +12,6 @@
       }
       body {
         background-color: #fffffb;
-        height: 100vh;
         display: flex;
         flex-direction: column;
       }
@@ -30,16 +29,13 @@
         font-size: 0.75em;
         line-height: 1.5em;
         opacity: 0.3;
-        position: absolute;
-        right: 0.5em;
-        top: 0;
+        padding-left: 0.5em;
       }
       #content {
         display: flex;
         flex-direction: column;
-        height: 100%;
-        justify-content: center;
-        margin: auto;
+        height: calc(100% - 3.5em);
+        justify-content: space-between;
         padding: 0 2%;
         width: 96%;
       }
@@ -108,19 +104,20 @@
         margin: 0 0 1em;
       }
       .bordered {
-        border-radius: 1em;
+        border-radius: 0.5em;
         border: 0.1em beige solid;
-        padding: 1em;
+        padding: 0.75em;
       }
       #menu {
+        display: block;
         background: none;
         border: none;
         content: "☰";
         cursor: pointer;
         font-size: 1.5em;
-        left: 2%;
-        position: absolute;
-        top: 2%;
+        text-align: left;
+        padding: 0 0.5em;
+        height: 2em;
       }
       #overlay {
         background-color: rgba(0, 0, 0, 0.2);
@@ -281,12 +278,12 @@
           },
           challenges: [
             { status: false, description: "Successfully maintain concentration after getting attacked" },
-            { status: false, description: "Kill an enemy with a spell at a distance of 60 feet or more" },
+            { status: false, description: "Defeat an enemy with a spell at a distance of 60 feet or more" },
             { status: false, description: "Move at least 15 feet and cast a spell with a range of Touch in a single turn", },
             { status: false, description: "Avoid or otherwise prevent damage by casting a spell with your reaction" },
             { status: false, description: "Critically hit with a spell or cantrip" },
             { status: false, description: "Upcast 3 or more spells at a higher level in a single combat", },
-            { status: false, description: "Kill an enemy with a spell at a distance of 30 feet or less" },
+            { status: false, description: "Defeat an enemy with a spell at a distance of 30 feet or less" },
             { status: false, description: "Damage 3 or more enemies with a single spell" },
             { status: false, description: "Successfully use your reaction to hit an enemy with an opportunity attack" },
           ],
@@ -397,13 +394,13 @@
           sidebarLink.innerText = gettingStartedLink.innerText = feat.featName;
           sidebarLink.onclick = function () {
             setTimeout(function () {
-              renderApp(state, featId);
+              renderApp(getState(), featId);
             }, 10);
             toggleSidebar();
           };
           gettingStartedLink.onclick = function () {
             setTimeout(function () {
-              renderApp(state, featId);
+              renderApp(getState(), featId);
             }, 10);
           };
           sidebarChildren.push(sidebarLink);
@@ -510,16 +507,18 @@
             For each feat, players are given a 3x3 grid of in-game conditions their player-character may satisfy. If a
             player can complete 3-in-a-row, then they permanently unlock that feat for their player character.
           </p>
+          <h1>Is this balanced?</h1>
+          <p>Probably not.</p>
           <h1>Can I make my own?</h1>
           <p>Absolutely.</p>
           <h1>Let's go!</h1>
           <div id="get-started-links"></div>
         </div>
       </div>
-    </div>
     <footer class="legal">
       <div>Dungeons & Dragons content is property of Wizards of the Coast LLC.</div>
       <div>Original content &copy;2023, Patrick Stewart</div>
     </footer>
+    </div>
   </body>
 </html>
