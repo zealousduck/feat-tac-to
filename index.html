@@ -10,11 +10,13 @@
         font-weight: lighter;
         margin: 0;
       }
+      
       body {
         background-color: #fffffb;
         display: flex;
         flex-direction: column;
       }
+      
       h1 {
         color: #822000;
         font-family: "Times New Roman", serif;
@@ -22,6 +24,7 @@
         font-variant: small-caps;
         margin: 0 0 0.5em;
       }
+      
       #toggle-info {
         background: transparent;
         border: none;
@@ -32,6 +35,7 @@
         opacity: 0.3;
         padding-left: 0.5em;
       }
+      
       #content {
         display: flex;
         flex-direction: column;
@@ -40,14 +44,17 @@
         padding: 0 2%;
         width: 96%;
       }
+      
       #landing {
         padding: 0 0.5em;
       }
+      
       #container {
         margin: 0 auto;
         max-width: 33em;
         position: relative;
       }
+      
       #grid {
         aspect-ratio: 1 / 1;
         background-color: #fefdee;
@@ -59,6 +66,7 @@
         position: relative;
         row-gap: 0.5em;
       }
+      
       .challenge {
         align-self: center;
         cursor: pointer;
@@ -66,6 +74,7 @@
         position: relative;
         text-align: center;
       }
+      
       .challenge.false::after {
         color: grey;
         content: "✓";
@@ -78,13 +87,16 @@
         transform: translate(-50%, -50%);
         transition: opacity 0.2s;
       }
+      
       .challenge.false:hover::after {
         opacity: 20%;
         transition: opacity 0.2s;
       }
+      
       .challenge.true {
         opacity: 50%;
       }
+      
       .challenge.true::after {
         color: green;
         content: "✓";
@@ -96,19 +108,23 @@
         top: 50%;
         transform: translate(-50%, -50%);
       }
+      
       #info {
         grid-column: 1 / span 3;
         height: 100%;
       }
+      
       p,
       li {
         margin: 0 0 1em;
       }
+
       .bordered {
         border-radius: 0.5em;
         border: 0.1em beige solid;
         padding: 0.75em;
       }
+
       #menu {
         background: none;
         border: none;
@@ -120,6 +136,7 @@
         margin: 0 0 0.25em;
         text-align: left;
       }
+
       #overlay {
         background-color: rgba(0, 0, 0, 0.2);
         display: none;
@@ -131,10 +148,12 @@
         width: 100%;
         z-index: 10;
       }
+
       #overlay.visible {
         display: unset;
         transition: display 0.4s;
       }
+
       #get-started-links {
         column-gap: 1em;
         display: flex;
@@ -143,6 +162,7 @@
         justify-content: space-around;
         row-gap: 1em;
       }
+
       #sidebar {
         background-color: #fffffb;
         box-shadow: 0px 1px 4px grey;
@@ -158,14 +178,17 @@
         width: 15em;
         z-index: 99;
       }
+
       #sidebar.visible {
         transform: translate(0%, 0%);
         transition: transform 0.4s;
       }
+
       #sidebar a {
         display: block;
         margin: 0 0 1em;
       }
+
       .legal {
         color: #aaaaaa;
         font-size: 0.8em;
@@ -173,22 +196,51 @@
         padding: 0 2em 1em;
         text-align: center;
       }
+
       .legal div {
         margin: 0 0 0.5em;
       }
+
       a {
         color: #337ab7;
         text-decoration: none;
       }
+
       hr {
         border: 1px solid;
         color: #eeeeee;
         margin: 0 0 1em;
       }
+
+      @media (max-width: 33em) {
+        #menu {
+          margin: 0;
+        } 
+      }
     </style>
 
     <script>
       const defaults = {
+        "#defensive-duelist": {
+          featId: "#defensive-duelist",
+          featName: "Defensive Duelist",
+          featDescription: {
+            p: [
+              "When you are wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, you can use your reaction to add your proficiency bonus to your AC for that attack, potentially causing the attack to miss you."
+            ]
+          },
+          challenges: [
+            { status: false, description: "Disarm an enemy" },
+            { status: false, description: "Avoid damage after an enemy critically misses an attack roll" },
+            { status: false, description: "Critically hit with an attack using a finesse weapon" },
+            { status: false, description: "Critically succeed a Dexterity check or saving throw" },
+            { status: false, description: "Defeat an enemy in a 1v1 duel" },
+            { status: false, description: "Take damage from an attack roll that exactly hits your AC" },
+            { status: false, description: "Dodge to successfully avoid damage" },
+            { status: false, description: "Use the help action to feint or taunt an enemy" },
+            { status: false, description: "Use a finesse weapon to non-lethally incapacitate an enemy" },
+          ],
+        },
         "#lucky": {
           featId: "#lucky",
           featName: "Lucky",
@@ -196,6 +248,30 @@
             p: [
               "You have inexplicable luck that seems to kick in at just the right moment.",
               "You have 3 luck points. Whenever you make an attack roll, an ability check, or a saving throw, you can spend one luck point to roll an additional d20. You can choose to spend one of your luck points after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw.",
+              "You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled.",
+              "You regain your expended luck points when you finish a long rest.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Critically succeed a Strength check or saving throw" },
+            { status: false, description: "Critically hit with an attack" },
+            { status: false, description: "Critically succeed a Intellect check or saving throw" },
+            { status: false, description: "Critically succeed a Dexterity check or saving throw" },
+            { status: false, description: "Critically fail any check or saving throw" },
+            { status: false, description: "Critically succeed a Wisdom check or saving throw" },
+            { status: false, description: "Critically succeed a Constitution check or saving throw" },
+            { status: false, description: "Survive a critical hit" },
+            { status: false, description: "Critically succeed a Charisma check or saving throw" },
+          ],
+        },
+        "#lucky-lite": {
+          featId: "#lucky-lite",
+          featName: "Lucky Lite",
+          featDescription: {
+            p: [
+              "(Lite feats are modified to reduce overall power level.)",
+              "You have inexplicable luck that seems to kick in at just the right moment.",
+              "You have 1 luck point. Whenever you make an attack roll, an ability check, or a saving throw, you can spend one luck point to roll an additional d20. You can choose to spend one of your luck points after you roll the die, but before the outcome is determined. You choose which of the d20s is used for the attack roll, ability check, or saving throw.",
               "You can also spend one luck point when an attack roll is made against you. Roll a d20, and then choose whether the attack uses the attacker's roll or yours. If more than one creature spends a luck point to influence the outcome of a roll, the points cancel each other out; no additional dice are rolled.",
               "You regain your expended luck points when you finish a long rest.",
             ],
@@ -245,6 +321,36 @@
               "Your speed increases by 10 feet.",
               "When you use the Dash action, difficult terrain doesn't cost you extra movement on that turn.",
               "When you make a melee attack against a creature, you don't provoke opportunity attacks from that creature for the rest of the turn, whether you hit or not.",
+            ],
+          },
+          challenges: [
+            { status: false, description: "Critically succeed a Dexterity check or saving throw" },
+            {
+              status: false,
+              description: "Move through 15 feet of difficult terrain in a single turn",
+            },
+            { status: false, description: "Successfully jump 10 feet over an obstacle during combat" },
+            { status: false, description: "Use your entire movement and successfully attack an enemy" },
+            { status: false, description: "Take the Dash action in 5 separate combats" },
+            { status: false, description: "Dodge to successfully avoid damage" },
+            { status: false, description: "Successfully climb 15 feet during combat" },
+            {
+              status: false,
+              description: "Disengage to avoid opportunity attacks from 3 enemies in a single turn",
+            },
+            { status: false, description: "Use your entire movement after taking the Dash action" },
+          ],
+        },
+        "#mobile-lite": {
+          featId: "#mobile-lite",
+          featName: "Mobile Lite",
+          featDescription: {
+            p: [
+              "(Lite feats are modified to reduce overall power level.)",
+              "You are exceptionally speedy and agile. You gain the following benefits:"
+            ],
+            ul: [
+              "Your speed increases by 10 feet.",
             ],
           },
           challenges: [
