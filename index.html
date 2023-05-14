@@ -40,25 +40,27 @@
         height: 100%;
         justify-content: center;
         margin: auto;
+        padding: 0 2%;
+        width: 96%;
+      }
+      #landing {
         padding: 0 0.5em;
-        width: calc(100% - 1em);
       }
       #container {
         margin: 0 auto;
         max-width: 33em;
-        padding: 0 0.75em;
         position: relative;
       }
       #grid {
         aspect-ratio: 1 / 1;
         background-color: #fefdee;
         box-shadow: 0px 2px 4px grey;
-        column-gap: 1em;
+        column-gap: 0.5em;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         position: relative;
-        row-gap: 1em;
+        row-gap: 0.5em;
       }
       .challenge {
         align-self: center;
@@ -116,9 +118,9 @@
         content: "☰";
         cursor: pointer;
         font-size: 1.5em;
-        left: 0.5em;
+        left: 2%;
         position: absolute;
-        top: 0.5em;
+        top: 2%;
       }
       #overlay {
         background-color: rgba(0, 0, 0, 0.2);
@@ -148,6 +150,7 @@
         box-shadow: 0px 1px 4px grey;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         height: calc(100% - 1em);
         padding: 1em 1em 0;
         position: absolute;
@@ -168,7 +171,7 @@
       .legal {
         color: #aaaaaa;
         font-size: 0.8em;
-        padding: 0 1em 1em;
+        padding: 0 2em 1em;
         text-align: center;
       }
       .legal div {
@@ -199,15 +202,15 @@
             ],
           },
           challenges: [
-            { status: false, description: "Roll a nat 20 on a Strength check or saving throw" },
-            { status: false, description: "Roll a nat 20 on an attack" },
-            { status: false, description: "Roll a nat 20 on a Intellect check or saving throw" },
-            { status: false, description: "Roll a nat 20 on a Dexterity check or saving throw" },
-            { status: false, description: "Roll a nat 1 on any check or saving throw" },
-            { status: false, description: "Roll a nat 20 on a Wisdom check or saving throw" },
-            { status: false, description: "Roll a nat 20 on a Constitution check or saving throw" },
-            { status: false, description: "Survive a critical hit without being knocked unconscious" },
-            { status: false, description: "Roll a nat 20 on a Charisma check or saving throw" },
+            { status: false, description: "Critically succeed a Strength check or saving throw" },
+            { status: false, description: "Critically hit with an attack" },
+            { status: false, description: "Critically succeed a Intellect check or saving throw" },
+            { status: false, description: "Critically succeed a Dexterity check or saving throw" },
+            { status: false, description: "Critically fail any check or saving throw" },
+            { status: false, description: "Critically succeed a Wisdom check or saving throw" },
+            { status: false, description: "Critically succeed a Constitution check or saving throw" },
+            { status: false, description: "Survive a critical hit" },
+            { status: false, description: "Critically succeed a Charisma check or saving throw" },
           ],
         },
         "#great-weapon-master": {
@@ -223,15 +226,15 @@
             ],
           },
           challenges: [
-            { status: false, description: "Roll a nat 20 on an attack roll with a 2-handed weapon" },
+            { status: false, description: "Critically hit with a 2-handed weapon" },
             { status: false, description: "Defeat an enemy with a greataxe" },
             { status: false, description: "Deal max damage with a 2-handed weapon" },
             { status: false, description: "Defeat an enemy with a greatsword" },
             { status: false, description: "Own at least four 2-handed weapons" },
             { status: false, description: "Defeat an enemy with a maul or greatclub" },
-            { status: false, description: "Defeat 2 or more enemies in a single turn with a 2-handed weapon" },
+            { status: false, description: "Defeat 2 enemies in a single turn with a 2-handed weapon" },
             { status: false, description: "Defeat an enemy with a halberd" },
-            { status: false, description: "Roll a nat 20 on a Strength check or saving throw" },
+            { status: false, description: "Critically succeed a Strength check or saving throw" },
           ],
         },
         "#mobile": {
@@ -246,19 +249,19 @@
             ],
           },
           challenges: [
-            { status: false, description: "Roll a nat 20 for a Dexterity check or saving throw" },
+            { status: false, description: "Critically succeed a Dexterity check or saving throw" },
             {
               status: false,
-              description: "Use your entire movement and move through at least 5 feet of difficult terrain",
+              description: "Move through 15 feet of difficult terrain in a single turn",
             },
-            { status: false, description: "Successfully jump 10 feet or more over an obstacle during combat" },
+            { status: false, description: "Successfully jump 10 feet over an obstacle during combat" },
             { status: false, description: "Use your entire movement and successfully attack an enemy" },
             { status: false, description: "Take the Dash action in 5 separate combats" },
-            { status: false, description: "Take the dodge action and successfully avoid incoming damage" },
-            { status: false, description: "Successfully climb 15 feet or more during combat" },
+            { status: false, description: "Dodge to successfully avoid damage" },
+            { status: false, description: "Successfully climb 15 feet during combat" },
             {
               status: false,
-              description: "Take the disengage action to avoid opportunity attacks from 3 enemies in a single turn",
+              description: "Disengage to avoid opportunity attacks from 3 enemies in a single turn",
             },
             { status: false, description: "Use your entire movement after taking the Dash action" },
           ],
@@ -277,20 +280,12 @@
             ],
           },
           challenges: [
-            { status: false, description: "Succeed on a constitution check to maintain concentration while casting" },
+            { status: false, description: "Successfully maintain concentration after getting attacked" },
             { status: false, description: "Kill an enemy with a spell at a distance of 60 feet or more" },
-            {
-              status: false,
-              description:
-                "Move at least 15 feet and cast a spell with a range of Touch during a single turn of combat",
-            },
+            { status: false, description: "Move at least 15 feet and cast a spell with a range of Touch in a single turn", },
             { status: false, description: "Avoid or otherwise prevent damage by casting a spell with your reaction" },
-            { status: false, description: "Roll a nat 20 on an spell attack roll" },
-            {
-              status: false,
-              description:
-                "In a single combat, cast 3 or more spells using a spell slot greater than that spell’s level",
-            },
+            { status: false, description: "Critically hit with a spell or cantrip" },
+            { status: false, description: "Upcast 3 or more spells at a higher level in a single combat", },
             { status: false, description: "Kill an enemy with a spell at a distance of 30 feet or less" },
             { status: false, description: "Damage 3 or more enemies with a single spell" },
             { status: false, description: "Successfully use your reaction to hit an enemy with an opportunity attack" },
@@ -416,6 +411,14 @@
         }
 
         document.getElementById("nav-links").replaceChildren(...sidebarChildren);
+
+        const reset = document.createElement("a");
+        reset.href = "";
+        reset.innerText = "Reset";
+        reset.onclick = function() {
+          saveState(defaults);
+        }
+        document.getElementById("sidebar").appendChild(reset);
 
         // a lil nasty but sure whatever my dude
         if (document.getElementById("get-started-links")) {
